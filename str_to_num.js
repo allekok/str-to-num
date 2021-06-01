@@ -98,9 +98,12 @@ function str_to_num(str) {
 		}
 		const token = T[0]
 		str = T[1]
-		if(token == 100 && top_less_than(tokens, token))
+		if(token == 100 && tokens[TOP(tokens)] < token)
 			tokens[TOP(tokens)] *= token
-		else if(token < 100 && top_less_than(tokens, 1000, 1)) {
+		else if(token < 100 &&
+			tokens[TOP(tokens)] == '+' &&
+			tokens[TOP(tokens) - 1] < 1000)
+		{
 			tokens[TOP(tokens) - 1] += token
 			tokens.pop()
 		}
@@ -111,7 +114,4 @@ function str_to_num(str) {
 }
 function TOP(A) {
 	return A.length - 1
-}
-function top_less_than(A, v, p = 0) {
-	return A[TOP(A) - p] ? A[TOP(A) - p] < v : false
 }
