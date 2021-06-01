@@ -1,0 +1,99 @@
+<html dir="rtl" lang="ckb">
+	<head>
+		<title>گۆڕینی وشە بۆ ژمارە</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
+		<style>
+		 @font-face {
+			 font-family:"nesx";
+			 font-display:swap;
+			 src:url("//allekok.github.io/src/frontend/style/DroidNaskh-Regular.woff2") format("woff2");
+		 }
+		 a {
+			 color:#000;
+			 text-decoration:none;
+		 }
+		 body {
+			 margin:0;
+			 font-family:"nesx";
+			 text-align:center;
+		 }
+		 header {
+			 padding:.5em 0;
+		 }
+		 input {
+			 font-family:inherit;
+			 font-size:1.5em;
+			 -webkit-appearance:none;
+			 border:0;
+			 border-bottom:2px solid;
+			 border-top:2px solid;
+			 border-radius:0;
+			 padding:.5em 1em;
+			 width:100%;
+			 display:block;
+			 direction:ltr;
+			 text-align:center;
+		 }
+		 input:focus {
+			 outline:0;
+			 border-color:#090;
+		 }
+		 #result {
+			 font-size:1.05em;
+			 padding:.5em;
+		 }
+		 footer {
+			 padding:1em 0;
+			 font-size:1.05em;
+		 }
+		</style>
+	</head>
+	<body>
+		<header>
+			<h1>
+				گۆڕینی وشە بۆ ژمارە
+			</h1>
+		</header>
+		<main>
+			<input type="text" id="number" placeholder="وشە">
+			<div id="result"></div>
+		</main>
+		<footer>
+			<a href="https://github.com/allekok/str-to-num">کۆد</a>
+			/
+			<a href="https://allekok.github.io/">بەرنامەکانی ئاڵەکۆک</a>
+		</footer>
+		
+		<script src="str_to_num.js" defer></script>
+	</body>
+	<script>
+	 /* Globals */
+	 const number = document.querySelector("#number")
+	 const result = document.querySelector("#result")
+
+	 /* Events */
+	 number.addEventListener("keyup", () => {
+		 result.innerHTML = format(str_to_num(number.value))
+	 })
+	 window.addEventListener("load", () => number.focus())
+
+	 /* Functions */
+	 function convertNums(str, f, t) {
+		 const assoc = {
+			 en: ["0","1","2","3","4","5","6","7","8","9"],
+			 fa: ["۰","۱","۲","۳","۴","۵","۶","۷","۸","۹"],
+			 ck: ["٠","١","٢","٣","٤","٥","٦","٧","٨","٩"]}
+		 for(const i in assoc.en)
+			 str = str.replace(new RegExp(assoc[f][i],"g"),
+					   assoc[t][i])
+		 return str
+	 }
+	 function toCkNums(str) {
+		 return convertNums(str, "en", "ck")
+	 }
+	 function format(num) {
+		 return `${toCkNums(String(num))}<br>${num}`
+	 }
+	</script>
+</html>
