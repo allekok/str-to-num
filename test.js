@@ -67,7 +67,7 @@ const num_to_str = function convert(n, lev=0) {
 	
 	return result
 }
-function test(n=2000, limit=1e15) {
+function test(n, limit) {
 	for(let l = 10; l <= limit; l *= 10) {
 		for(let i = 0; i < n; i++) {
 			const num = parseInt(Math.random() * l)
