@@ -69,13 +69,6 @@ const dict = {
 	1e12,
 }
 const max_tok_len = max_token_len(dict)
-function max_token_len(d) {
-	let max = 0
-	for(const k in d)
-		if(k.length > max)
-			max = k.length
-	return max
-}
 function calc(A) {
 	let N = 1, i = 0
 	for(; i < A.length && A[i] != '+'; i++)
@@ -83,6 +76,13 @@ function calc(A) {
 	A = A.slice(i + 1)
 	if(!i) N = i
 	return A.length ? N + calc(A) : N
+}
+function max_token_len(d) {
+	let max = 0
+	for(const k in d)
+		if(k.length > max)
+			max = k.length
+	return max
 }
 function next_token(str) {
 	for(let i = Math.min(max_tok_len, str.length); i > 0; i--) {
